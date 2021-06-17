@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="milageTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblCar">
+          <Key>
+            <PropertyRef Name="Car_ID" />
+          </Key>
+          <Property Name="Car_ID" Type="int" Nullable="false" />
+          <Property Name="Car_Name" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Car_Make" Type="nchar" MaxLength="20" />
+          <Property Name="Car_Model" Type="nchar" MaxLength="20" />
+          <Property Name="Car_NumberPlate" Type="nchar" MaxLength="9" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblFillUp">
+          <Key>
+            <PropertyRef Name="FillUp_ID" />
+          </Key>
+          <Property Name="FillUp_ID" Type="int" Nullable="false" />
+          <Property Name="FillUp_Milage" Type="int" Nullable="false" />
+          <Property Name="FillUp_Odo" Type="int" Nullable="false" />
+          <Property Name="FillUp_DateTime" Type="date" Nullable="false" />
+          <Property Name="FuelType_ID" Type="int" Nullable="false" />
+          <Property Name="Car_ID" Type="int" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="FillUp_Liters" Type="int" Nullable="false" />
+          <Property Name="FillUp_LiterPrice" Type="int" Nullable="false" />
+          <Property Name="FillUp_Total" Type="int" Nullable="false" />
+          <Property Name="FillUp_SlipImage" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tblFuelType">
+          <Key>
+            <PropertyRef Name="FuelType_ID" />
+          </Key>
+          <Property Name="FuelType_ID" Type="int" Nullable="false" />
+          <Property Name="FuelType_Description" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsAdmin" Type="nchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblFillUp_tblCar">
+          <End Role="tblCar" Type="Self.tblCar" Multiplicity="1" />
+          <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCar">
+              <PropertyRef Name="Car_ID" />
+            </Principal>
+            <Dependent Role="tblFillUp">
+              <PropertyRef Name="Car_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFillUp_tblFuelType">
+          <End Role="tblFuelType" Type="Self.tblFuelType" Multiplicity="1" />
+          <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFuelType">
+              <PropertyRef Name="FuelType_ID" />
+            </Principal>
+            <Dependent Role="tblFillUp">
+              <PropertyRef Name="FuelType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFillUp_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblFillUp">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="milageTrackerModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCar" EntityType="Self.tblCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFillUp" EntityType="Self.tblFillUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFuelType" EntityType="Self.tblFuelType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblFillUp_tblCar" Association="Self.FK_tblFillUp_tblCar">
+            <End Role="tblCar" EntitySet="tblCar" />
+            <End Role="tblFillUp" EntitySet="tblFillUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFillUp_tblFuelType" Association="Self.FK_tblFillUp_tblFuelType">
+            <End Role="tblFuelType" EntitySet="tblFuelType" />
+            <End Role="tblFillUp" EntitySet="tblFillUp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFillUp_tblUser" Association="Self.FK_tblFillUp_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblFillUp" EntitySet="tblFillUp" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="milageTrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblCar">
+          <Key>
+            <PropertyRef Name="Car_ID" />
+          </Key>
+          <Property Name="Car_ID" Type="Int32" Nullable="false" />
+          <Property Name="Car_Name" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Car_Make" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Car_Model" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Car_NumberPlate" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblFillUps" Relationship="Self.FK_tblFillUp_tblCar" FromRole="tblCar" ToRole="tblFillUp" />
+        </EntityType>
+        <EntityType Name="tblFillUp">
+          <Key>
+            <PropertyRef Name="FillUp_ID" />
+          </Key>
+          <Property Name="FillUp_ID" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_Milage" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_Odo" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_DateTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FuelType_ID" Type="Int32" Nullable="false" />
+          <Property Name="Car_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_Liters" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_LiterPrice" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_Total" Type="Int32" Nullable="false" />
+          <Property Name="FillUp_SlipImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCar" Relationship="Self.FK_tblFillUp_tblCar" FromRole="tblFillUp" ToRole="tblCar" />
+          <NavigationProperty Name="tblFuelType" Relationship="Self.FK_tblFillUp_tblFuelType" FromRole="tblFillUp" ToRole="tblFuelType" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK_tblFillUp_tblUser" FromRole="tblFillUp" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblFuelType">
+          <Key>
+            <PropertyRef Name="FuelType_ID" />
+          </Key>
+          <Property Name="FuelType_ID" Type="Int32" Nullable="false" />
+          <Property Name="FuelType_Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblFillUps" Relationship="Self.FK_tblFillUp_tblFuelType" FromRole="tblFuelType" ToRole="tblFillUp" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IsAdmin" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblFillUps" Relationship="Self.FK_tblFillUp_tblUser" FromRole="tblUser" ToRole="tblFillUp" />
+        </EntityType>
+        <Association Name="FK_tblFillUp_tblCar">
+          <End Role="tblCar" Type="Self.tblCar" Multiplicity="1" />
+          <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCar">
+              <PropertyRef Name="Car_ID" />
+            </Principal>
+            <Dependent Role="tblFillUp">
+              <PropertyRef Name="Car_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFillUp_tblFuelType">
+          <End Role="tblFuelType" Type="Self.tblFuelType" Multiplicity="1" />
+          <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblFuelType">
+              <PropertyRef Name="FuelType_ID" />
+            </Principal>
+            <Dependent Role="tblFillUp">
+              <PropertyRef Name="FuelType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblFillUp_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblFillUp">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="milageTrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblCars" EntityType="Self.tblCar" />
+          <EntitySet Name="tblFillUps" EntityType="Self.tblFillUp" />
+          <EntitySet Name="tblFuelTypes" EntityType="Self.tblFuelType" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK_tblFillUp_tblCar" Association="Self.FK_tblFillUp_tblCar">
+            <End Role="tblCar" EntitySet="tblCars" />
+            <End Role="tblFillUp" EntitySet="tblFillUps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFillUp_tblFuelType" Association="Self.FK_tblFillUp_tblFuelType">
+            <End Role="tblFuelType" EntitySet="tblFuelTypes" />
+            <End Role="tblFillUp" EntitySet="tblFillUps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblFillUp_tblUser" Association="Self.FK_tblFillUp_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblFillUp" EntitySet="tblFillUps" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="milageTrackerModelStoreContainer" CdmEntityContainer="milageTrackerEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="milageTrackerModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCars">
+            <EntityTypeMapping TypeName="milageTrackerModel.tblCar">
+              <MappingFragment StoreEntitySet="tblCar">
+                <ScalarProperty Name="Car_ID" ColumnName="Car_ID" />
+                <ScalarProperty Name="Car_Name" ColumnName="Car_Name" />
+                <ScalarProperty Name="Car_Make" ColumnName="Car_Make" />
+                <ScalarProperty Name="Car_Model" ColumnName="Car_Model" />
+                <ScalarProperty Name="Car_NumberPlate" ColumnName="Car_NumberPlate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFillUps">
+            <EntityTypeMapping TypeName="milageTrackerModel.tblFillUp">
+              <MappingFragment StoreEntitySet="tblFillUp">
+                <ScalarProperty Name="FillUp_ID" ColumnName="FillUp_ID" />
+                <ScalarProperty Name="FillUp_Milage" ColumnName="FillUp_Milage" />
+                <ScalarProperty Name="FillUp_Odo" ColumnName="FillUp_Odo" />
+                <ScalarProperty Name="FillUp_DateTime" ColumnName="FillUp_DateTime" />
+                <ScalarProperty Name="FuelType_ID" ColumnName="FuelType_ID" />
+                <ScalarProperty Name="Car_ID" ColumnName="Car_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="FillUp_Liters" ColumnName="FillUp_Liters" />
+                <ScalarProperty Name="FillUp_LiterPrice" ColumnName="FillUp_LiterPrice" />
+                <ScalarProperty Name="FillUp_Total" ColumnName="FillUp_Total" />
+                <ScalarProperty Name="FillUp_SlipImage" ColumnName="FillUp_SlipImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFuelTypes">
+            <EntityTypeMapping TypeName="milageTrackerModel.tblFuelType">
+              <MappingFragment StoreEntitySet="tblFuelType">
+                <ScalarProperty Name="FuelType_ID" ColumnName="FuelType_ID" />
+                <ScalarProperty Name="FuelType_Description" ColumnName="FuelType_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="milageTrackerModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
