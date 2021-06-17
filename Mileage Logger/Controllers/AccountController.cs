@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Mileage_Logger.IdentityManagement;
 using Mileage_Logger.Models;
+using Mileage_Logger.ViewModels;
 
 namespace Mileage_Logger.Controllers
 {

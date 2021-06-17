@@ -8,6 +8,6 @@ namespace Mileage_Logger.ViewModels
 {
     public class UserAccountViewModel
     {
-        private UserAccount UserAccount { get; set; }
+        public UserAccount UserAccount { get; set; }
     }
 }
