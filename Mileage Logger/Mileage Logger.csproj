@@ -178,6 +178,7 @@
     <Compile Include="IdentityManagement\AuthAttribute.cs" />
     <Compile Include="IdentityManagement\IdentityPrincipal.cs" />
     <Compile Include="IdentityManagement\UserSession.cs" />
+    <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
