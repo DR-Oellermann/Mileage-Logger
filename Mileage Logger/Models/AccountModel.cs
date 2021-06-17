@@ -17,9 +17,9 @@ namespace Mileage_Logger.Models
 
             //add all users and passwords to lsit
             //uses email as username now not first name
-            foreach (var item in db.Users)
+            foreach (var item in db.tblUsers)
             {
-                listAccounts.Add(new UserAccount { UserID = item.User_ID, Username = item.User_Email, Password = item.User_Password, Role = item.IsAdmin });
+                listAccounts.Add(new UserAccount { UserID = item.User_ID, Username = item.Email, Password = item.Password, Role = item.IsAdmin });
             }
 
         }
