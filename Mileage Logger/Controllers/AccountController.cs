@@ -40,6 +40,11 @@ namespace Mileage_Logger.Controllers
                 return View("Login");
             }
 
+
+            //test
+
+
+
             //used to create a session for the currrent user with their username
             UserSession.Username = userAccountViewModel.UserAccount.Username;
             return RedirectToAction("Index", "Home");

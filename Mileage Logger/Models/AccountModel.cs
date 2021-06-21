@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -13,7 +14,7 @@ namespace Mileage_Logger.Models
 
         public AccountModel()
         {
-            //listAccounts.Add(new userAccount {Username = "admin", Password = "admin", Role = "admin"});
+            //listAccounts.Add(new UserAccount {Username = "admin", Password = "admin", Role = "admin"});
 
             //add all users and passwords to lsit
             //uses email as username now not first name
@@ -37,9 +38,11 @@ namespace Mileage_Logger.Models
         }
 
         //use for login to make to username and passwd match whats in db/list
-        public UserAccount Login(string username, string password)
+        public tblUser Login(string username, string password)
         {
-            return listAccounts.FirstOrDefault(x => x.Username == username && x.Password == password);
+            Debug.WriteLine(username + "     " + password);
+            Debug.WriteLine(db.tblUsers.FirstOrDefault(x => x.Username == username && x.Password == password));
+            return db.tblUsers.FirstOrDefault(x => x.Username == username && x.Password == password);
         }
 
     }
