@@ -31,10 +31,10 @@ namespace Mileage_Logger.Controllers
             AccountModel accountModel = new AccountModel();
 
             //checkls all inputs are populated and makes sure the username and passowrd match
-            if (string.IsNullOrEmpty(userAccountViewModel.UserAccount.Username) ||
-                (string.IsNullOrEmpty(userAccountViewModel.UserAccount.Password)) ||
-                accountModel.Login(userAccountViewModel.UserAccount.Username,
-                    userAccountViewModel.UserAccount.Password) == null)
+            if (string.IsNullOrEmpty(userAccountViewModel.tblUser.Username) ||
+                (string.IsNullOrEmpty(userAccountViewModel.tblUser.Password)) ||
+                accountModel.Login(userAccountViewModel.tblUser.Username,
+                    userAccountViewModel.tblUser.Password) == null)
             {
                 ViewBag.LoginError = "The details you entered are incorrect or you need to register!";
                 return View("Login");
@@ -46,7 +46,7 @@ namespace Mileage_Logger.Controllers
 
 
             //used to create a session for the currrent user with their username
-            UserSession.Username = userAccountViewModel.UserAccount.Username;
+            UserSession.Username = userAccountViewModel.tblUser.Username;
             return RedirectToAction("Index", "Home");
         }
 
