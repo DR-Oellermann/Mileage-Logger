@@ -26,7 +26,7 @@ namespace Mileage_Logger.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string IsAdmin { get; set; }
+        public string IsAdmin { get; set; } = "user";
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblFillUp> tblFillUps { get; set; }
