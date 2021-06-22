@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Mileage_Logger.IdentityManagement;
 using Mileage_Logger.Models;
 
 namespace Mileage_Logger.Controllers
@@ -50,12 +51,31 @@ namespace Mileage_Logger.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FillUp_ID,FillUp_Milage,FillUp_Odo,FillUp_DateTime,FuelType_ID,Car_ID,User_ID,FillUp_Liters,FillUp_LiterPrice,FillUp_Total,FillUp_SlipImage")] tblFillUp tblFillUp)
+        public ActionResult Create([Bind(Include = "FillUp_Milage,FillUp_Odo,FillUp_DateTime,FuelType_ID,Car_ID,FillUp_Liters,FillUp_LiterPrice,FillUp_Total,FillUp_SlipImage")] tblFillUp tblFillUp)
         {
+            AccountModel accountModel = new AccountModel();
             if (ModelState.IsValid)
             {
-                db.tblFillUps.Add(tblFillUp);
+                //db.tblFillUps.Add(tblFillUp);
+                //tblFillUp.User_ID(accountModel.findUserId(UserSession.Username));
+
+                //need to add image save
+
+                db.tblFillUps.Add(new tblFillUp()
+                {
+                    FillUp_Milage = tblFillUp.FillUp_Milage,
+                    FillUp_Odo = tblFillUp.FillUp_Odo,
+                    FillUp_DateTime = tblFillUp.FillUp_DateTime.Date,
+                    FuelType_ID = tblFillUp.FuelType_ID,
+                    Car_ID = tblFillUp.Car_ID,
+                    User_ID = accountModel.findUserId(UserSession.Username),
+                    FillUp_Liters = tblFillUp.FillUp_Liters,
+                    FillUp_LiterPrice = tblFillUp.FillUp_LiterPrice,
+                    FillUp_Total = tblFillUp.FillUp_Total,
+                    FillUp_SlipImage = tblFillUp.FillUp_SlipImage
+                });
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
