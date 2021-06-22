@@ -16,6 +16,7 @@ namespace Mileage_Logger.Controllers
 {
     public class AccountController : Controller
     {
+        private milageTrackerEntities db = new milageTrackerEntities();
         // need to add create acc page (register)
         // need to add login page
         //need to add logout
@@ -48,6 +49,27 @@ namespace Mileage_Logger.Controllers
             //used to create a session for the currrent user with their username
             UserSession.Username = userAccountViewModel.tblUser.Username;
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(string Username, string FirstName, string LastName, string Email, string Password)
+        {
+            db.tblUsers.Add(new tblUser()
+            {
+                Username = Username,
+                FirstName = FirstName,
+                LastName = LastName,
+                Email = Email,
+                Password = Password
+            });
+            db.SaveChanges();
+
+            return View("Login");
         }
 
         //used if the user does not have permission to view the page (IE not admin)
