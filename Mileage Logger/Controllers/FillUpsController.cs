@@ -11,6 +11,7 @@ using Mileage_Logger.Models;
 
 namespace Mileage_Logger.Controllers
 {
+    [Auth(Roles = ("admin, user"))]
     public class FillUpsController : Controller
     {
         private milageTrackerEntities db = new milageTrackerEntities();
