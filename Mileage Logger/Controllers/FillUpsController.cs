@@ -15,11 +15,16 @@ namespace Mileage_Logger.Controllers
     public class FillUpsController : Controller
     {
         private milageTrackerEntities db = new milageTrackerEntities();
+        static AccountModel accountModel = new AccountModel();
+        private int userID = accountModel.findUserId(UserSession.Username);
 
         // GET: FillUps
         public ActionResult Index()
         {
-            var tblFillUps = db.tblFillUps.Include(t => t.tblCar).Include(t => t.tblFuelType).Include(t => t.tblUser);
+            var tblFillUps = db.tblFillUps.Where(x => x.User_ID == userID)
+                .Include(t => t.tblCar).Include(t => t.tblFuelType)
+                .Include(t => t.tblUser);
+                
             return View(tblFillUps.ToList());
         }
 
