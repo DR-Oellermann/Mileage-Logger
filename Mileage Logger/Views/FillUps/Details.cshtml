@@ -1,0 +1,98 @@
+﻿@model Mileage_Logger.Models.tblFillUp
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblFillUp</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_Milage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_Milage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_Odo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_Odo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_DateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_Liters)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_Liters)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_LiterPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_LiterPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_Total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_Total)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FillUp_SlipImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FillUp_SlipImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCar.Car_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCar.Car_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblFuelType.FuelType_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblFuelType.FuelType_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUser.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUser.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FillUp_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
