@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+
 namespace Mileage_Logger.Models
 {
     using System;
@@ -17,6 +19,8 @@ namespace Mileage_Logger.Models
         public int FillUp_ID { get; set; }
         public int FillUp_Milage { get; set; }
         public int FillUp_Odo { get; set; }
+
+        [DataType(DataType.Date)]
         public System.DateTime FillUp_DateTime { get; set; }
         public int FuelType_ID { get; set; }
         public int Car_ID { get; set; }

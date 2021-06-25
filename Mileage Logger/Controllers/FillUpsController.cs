@@ -46,7 +46,7 @@ namespace Mileage_Logger.Controllers
         // GET: FillUps/Create
         public ActionResult Create()
         {
-            ViewBag.Car_ID = new SelectList(db.tblCars, "Car_ID", "Car_Name");
+            ViewBag.Car_ID = new SelectList(db.tblCars.Where(x=>x.User_ID == userID), "Car_ID", "Car_Name");
             ViewBag.FuelType_ID = new SelectList(db.tblFuelTypes, "FuelType_ID", "FuelType_Description");
             ViewBag.User_ID = new SelectList(db.tblUsers, "User_ID", "Username");
             return View();
@@ -85,7 +85,7 @@ namespace Mileage_Logger.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Car_ID = new SelectList(db.tblCars, "Car_ID", "Car_Name", tblFillUp.Car_ID);
+            ViewBag.Car_ID = new SelectList(db.tblCars.Where(x => x.User_ID == userID), "Car_ID", "Car_Name");
             ViewBag.FuelType_ID = new SelectList(db.tblFuelTypes, "FuelType_ID", "FuelType_Description", tblFillUp.FuelType_ID);
             ViewBag.User_ID = new SelectList(db.tblUsers, "User_ID", "Username", tblFillUp.User_ID);
             return View(tblFillUp);
@@ -103,7 +103,7 @@ namespace Mileage_Logger.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Car_ID = new SelectList(db.tblCars, "Car_ID", "Car_Name", tblFillUp.Car_ID);
+            ViewBag.Car_ID = new SelectList(db.tblCars.Where(x => x.User_ID == userID), "Car_ID", "Car_Name");
             ViewBag.FuelType_ID = new SelectList(db.tblFuelTypes, "FuelType_ID", "FuelType_Description", tblFillUp.FuelType_ID);
             ViewBag.User_ID = new SelectList(db.tblUsers, "User_ID", "Username", tblFillUp.User_ID);
             return View(tblFillUp);
@@ -122,7 +122,7 @@ namespace Mileage_Logger.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Car_ID = new SelectList(db.tblCars, "Car_ID", "Car_Name", tblFillUp.Car_ID);
+            ViewBag.Car_ID = new SelectList(db.tblCars.Where(x => x.User_ID == userID), "Car_ID", "Car_Name");
             ViewBag.FuelType_ID = new SelectList(db.tblFuelTypes, "FuelType_ID", "FuelType_Description", tblFillUp.FuelType_ID);
             ViewBag.User_ID = new SelectList(db.tblUsers, "User_ID", "Username", tblFillUp.User_ID);
             return View(tblFillUp);
