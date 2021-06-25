@@ -59,6 +59,7 @@ namespace Mileage_Logger.Controllers
         [HttpPost]
         public ActionResult Register(string Username, string FirstName, string LastName, string Email, string Password)
         {
+            //need to add validation
             db.tblUsers.Add(new tblUser()
             {
                 Username = Username,

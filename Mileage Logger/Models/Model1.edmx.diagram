@@ -5,11 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="456380f413084ff9a018d8a9da9e0f5f" Name="Diagram1">
-        <EntityTypeShape EntityType="milageTrackerModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="milageTrackerModel.tblCar" Width="1.5" PointX="0.75" PointY="9.5" />
-        <EntityTypeShape EntityType="milageTrackerModel.tblFillUp" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="milageTrackerModel.tblFuelType" Width="1.5" PointX="0.75" PointY="2.125" />
-        <EntityTypeShape EntityType="milageTrackerModel.tblUser" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="milageTrackerModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.25" />
+        <EntityTypeShape EntityType="milageTrackerModel.tblCar" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="milageTrackerModel.tblFillUp" Width="1.5" PointX="5.25" PointY="0.5" />
+        <EntityTypeShape EntityType="milageTrackerModel.tblFuelType" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="milageTrackerModel.tblUser" Width="1.5" PointX="0.75" PointY="1" />
+        <AssociationConnector Association="milageTrackerModel.FK_tblCar_tblUser" />
         <AssociationConnector Association="milageTrackerModel.FK_tblFillUp_tblCar" />
         <AssociationConnector Association="milageTrackerModel.FK_tblFillUp_tblFuelType" />
         <AssociationConnector Association="milageTrackerModel.FK_tblFillUp_tblUser" />

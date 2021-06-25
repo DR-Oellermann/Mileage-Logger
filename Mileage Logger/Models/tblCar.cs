@@ -25,7 +25,9 @@ namespace Mileage_Logger.Models
         public string Car_Make { get; set; }
         public string Car_Model { get; set; }
         public string Car_NumberPlate { get; set; }
+        public int User_ID { get; set; }
     
+        public virtual tblUser tblUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblFillUp> tblFillUps { get; set; }
     }

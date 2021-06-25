@@ -24,6 +24,7 @@
           <Property Name="Car_Make" Type="nchar" MaxLength="20" />
           <Property Name="Car_Model" Type="nchar" MaxLength="20" />
           <Property Name="Car_NumberPlate" Type="nchar" MaxLength="9" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblFillUp">
           <Key>
@@ -60,6 +61,18 @@
           <Property Name="Password" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="IsAdmin" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tblCar_tblUser">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblCar" Type="Self.tblCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblCar">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblFillUp_tblCar">
           <End Role="tblCar" Type="Self.tblCar" Multiplicity="1" />
           <End Role="tblFillUp" Type="Self.tblFillUp" Multiplicity="*" />
@@ -102,6 +115,10 @@
           <EntitySet Name="tblFillUp" EntityType="Self.tblFillUp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblFuelType" EntityType="Self.tblFuelType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblCar_tblUser" Association="Self.FK_tblCar_tblUser">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblCar" EntitySet="tblCar" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblFillUp_tblCar" Association="Self.FK_tblFillUp_tblCar">
             <End Role="tblCar" EntitySet="tblCar" />
             <End Role="tblFillUp" EntitySet="tblFillUp" />
@@ -125,6 +142,10 @@
           <EntitySet Name="tblFillUps" EntityType="milageTrackerModel.tblFillUp" />
           <EntitySet Name="tblFuelTypes" EntityType="milageTrackerModel.tblFuelType" />
           <EntitySet Name="tblUsers" EntityType="milageTrackerModel.tblUser" />
+          <AssociationSet Name="FK_tblCar_tblUser" Association="milageTrackerModel.FK_tblCar_tblUser">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblCar" EntitySet="tblCars" />
+          </AssociationSet>
           <AssociationSet Name="FK_tblFillUp_tblCar" Association="milageTrackerModel.FK_tblFillUp_tblCar">
             <End Role="tblCar" EntitySet="tblCars" />
             <End Role="tblFillUp" EntitySet="tblFillUps" />
@@ -157,6 +178,8 @@
           <Property Name="Car_Make" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Car_Model" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Car_NumberPlate" Type="String" Nullable="false" MaxLength="9" FixedLength="true" Unicode="true" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblUser" Relationship="milageTrackerModel.FK_tblCar_tblUser" FromRole="tblCar" ToRole="tblUser" />
           <NavigationProperty Name="tblFillUps" Relationship="milageTrackerModel.FK_tblFillUp_tblCar" FromRole="tblCar" ToRole="tblFillUp" />
         </EntityType>
         <EntityType Name="tblFillUp">
@@ -197,8 +220,21 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="IsAdmin" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tblCars" Relationship="milageTrackerModel.FK_tblCar_tblUser" FromRole="tblUser" ToRole="tblCar" />
           <NavigationProperty Name="tblFillUps" Relationship="milageTrackerModel.FK_tblFillUp_tblUser" FromRole="tblUser" ToRole="tblFillUp" />
         </EntityType>
+        <Association Name="FK_tblCar_tblUser">
+          <End Type="milageTrackerModel.tblUser" Role="tblUser" Multiplicity="1" />
+          <End Type="milageTrackerModel.tblCar" Role="tblCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="tblCar">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_tblFillUp_tblCar">
           <End Type="milageTrackerModel.tblCar" Role="tblCar" Multiplicity="1" />
           <End Type="milageTrackerModel.tblFillUp" Role="tblFillUp" Multiplicity="*" />
@@ -235,7 +271,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -255,6 +291,7 @@
           <EntitySetMapping Name="tblCars">
             <EntityTypeMapping TypeName="milageTrackerModel.tblCar">
               <MappingFragment StoreEntitySet="tblCar">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Car_NumberPlate" ColumnName="Car_NumberPlate" />
                 <ScalarProperty Name="Car_Model" ColumnName="Car_Model" />
                 <ScalarProperty Name="Car_Make" ColumnName="Car_Make" />
