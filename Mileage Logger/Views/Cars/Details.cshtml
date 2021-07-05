@@ -1,0 +1,58 @@
+﻿@model Mileage_Logger.Models.tblCar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblCar</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Car_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car_Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car_Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car_Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car_Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Car_NumberPlate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Car_NumberPlate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblUser.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblUser.Username)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Car_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

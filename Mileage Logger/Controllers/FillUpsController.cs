@@ -28,6 +28,11 @@ namespace Mileage_Logger.Controllers
             return View(tblFillUps.ToList());
         }
 
+        public ActionResult Home()
+        {
+            return View();
+        }
+
         // GET: FillUps/Details/5
         public ActionResult Details(int? id)
         {

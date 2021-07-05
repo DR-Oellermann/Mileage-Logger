@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Mileage_Logger.Models.tblCar>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+
+@foreach (var item in Model)
+{
+    <div class="card customIndexCard">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <h5 class="card-title"><strong>@item.Car_Name</strong></h5>
+                <p class="card-text">@item.Car_Make</p>
+                <p class="card-text">@item.Car_Model</p>
+                <p class="card-text">@item.Car_NumberPlate</p>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body IndexCard">
+                    <button class="btn btn-primary" name="ViewCar" onclick="location.href = '@Url.Action("Details", "Cars", new {  id = item.Car_ID})'">View</button>
+                    <br/>
+                    <button class="btn btn-warning" name="EditCar" onclick="location.href = '@Url.Action("Edit", "Cars", new {  id = item.Car_ID})'">Edit</button>
+                    <br/>
+                    <button class="btn btn-danger" name="DeleteCar" onclick="location.href = '@Url.Action("Delete", "Cars", new {  id = item.Car_ID})'">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<style>
+    .customIndexCard {
+        border-style : solid;
+        border-color : #A8A8A8;
+        border-radius : 5px;
+        padding : 0.5rem;
+        max-width: 30%
+    }
+
+    .IndexCard {
+        border-left: solid;
+        border-color: dimgrey;
+        padding: 2%;
+    }
+
+    .IndexCard > button{
+        margin: 0.5rem
+    }
+
+
+</style>

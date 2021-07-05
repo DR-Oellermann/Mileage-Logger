@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+
+
+
+<div class="row">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Car's</h5>
+            <p class="card-text">Manage and add your car's.</p>
+            <input class="btn btn-primary" value="Add Car" onclick="window.location.href = '@Url.Action("Index", "Cars")';" />
+        </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Fill Up</h5>
+            <p class="card-text">View your recent fill up's</p>
+            <input class="btn btn-primary" value="Log fill up" onclick="window.location.href = '@Url.Action("Index", "FillUps")';" />
+        </div>
+    </div>
+</div>
