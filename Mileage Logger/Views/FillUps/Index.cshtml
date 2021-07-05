@@ -9,79 +9,52 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_Milage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_Odo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_DateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_Liters)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_LiterPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_Total)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FillUp_SlipImage)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tblCar.Car_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tblFuelType.FuelType_Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tblUser.Username)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_Milage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_Odo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_DateTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_Liters)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_LiterPrice)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_Total)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FillUp_SlipImage)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblCar.Car_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblFuelType.FuelType_Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblUser.Username)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.FillUp_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.FillUp_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.FillUp_ID })
-        </td>
-    </tr>
+@foreach (var item in Model)
+{
+    <div class="card customIndexCard">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <h5 class="card-title"><strong>@item.FillUp_DateTime.Date</strong></h5>
+                <p class="card-text">Liter Price: @item.FillUp_LiterPrice</p>
+                <p class="card-text">Liters: @item.FillUp_Liters</p>
+                <p class="card-text">Millage: @item.FillUp_Milage</p>
+                <p class="card-text">Odo: @item.FillUp_Odo</p>
+                <p class="card-text">Fuel Type: @item.tblFuelType.FuelType_Description</p>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body IndexCard">
+                    <img src="@item.FillUp_SlipImage" alt="Mo Image" style="max-width: 10px; max-height: 15px;"/>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <button class="btn btn-primary" name="ViewCar" onclick="location.href = '@Url.Action("Details", "Cars", new {  id = item.Car_ID})'">View</button>
+        <button class="btn btn-warning" name="EditCar" onclick="location.href = '@Url.Action("Edit", "Cars", new {  id = item.Car_ID})'">Edit</button>
+        <button class="btn btn-danger" name="DeleteCar" onclick="location.href = '@Url.Action("Delete", "Cars", new {  id = item.Car_ID})'">Delete</button>
+    </div>
 }
 
-</table>
+
+
+
+<style>
+    .customIndexCard {
+        border-style: solid;
+        border-color: #A8A8A8;
+        border-radius: 5px;
+        padding: 0.5rem;
+        max-width: 30%
+    }
+
+    .IndexCard {
+        border-left: solid;
+        border-color: dimgrey;
+        padding: 2%;
+    }
+
+        .IndexCard > button {
+            margin: 0.5rem
+        }
+</style>
+
