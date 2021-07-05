@@ -28,6 +28,11 @@ namespace Mileage_Logger.Controllers
             return View(tblFillUps.ToList());
         }
 
+        public ActionResult Report()
+        {
+            return View();
+        }
+
         public ActionResult Home()
         {
             return View();
@@ -110,7 +115,6 @@ namespace Mileage_Logger.Controllers
             }
             ViewBag.Car_ID = new SelectList(db.tblCars.Where(x => x.User_ID == userID), "Car_ID", "Car_Name");
             ViewBag.FuelType_ID = new SelectList(db.tblFuelTypes, "FuelType_ID", "FuelType_Description", tblFillUp.FuelType_ID);
-            ViewBag.User_ID = new SelectList(db.tblUsers, "User_ID", "Username", tblFillUp.User_ID);
             return View(tblFillUp);
         }
 
@@ -119,11 +123,25 @@ namespace Mileage_Logger.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "FillUp_ID,FillUp_Milage,FillUp_Odo,FillUp_DateTime,FuelType_ID,Car_ID,User_ID,FillUp_Liters,FillUp_LiterPrice,FillUp_Total,FillUp_SlipImage")] tblFillUp tblFillUp)
+        public ActionResult Edit([Bind(Include = "FillUp_ID,FillUp_Milage,FillUp_Odo,FillUp_DateTime,FuelType_ID,Car_ID,FillUp_Liters,FillUp_LiterPrice,FillUp_Total,FillUp_SlipImage")] tblFillUp tblFillUp)
         {
+
             if (ModelState.IsValid)
             {
-                db.Entry(tblFillUp).State = EntityState.Modified;
+                var currentFillUp = db.tblFillUps.FirstOrDefault(x => x.FillUp_ID == tblFillUp.FillUp_ID);
+                if (currentFillUp == null)
+                    return HttpNotFound();
+
+                currentFillUp.FillUp_DateTime = tblFillUp.FillUp_DateTime;
+                currentFillUp.FillUp_LiterPrice = tblFillUp.FillUp_LiterPrice;
+                currentFillUp.FillUp_Liters = tblFillUp.FillUp_Liters;
+                currentFillUp.FillUp_Milage = tblFillUp.FillUp_Milage;
+                currentFillUp.FillUp_Odo = tblFillUp.FillUp_Odo;
+                currentFillUp.FillUp_SlipImage = tblFillUp.FillUp_SlipImage;
+                currentFillUp.FuelType_ID = tblFillUp.FuelType_ID;
+                currentFillUp.Car_ID = tblFillUp.Car_ID;
+                currentFillUp.FillUp_Total = tblFillUp.FillUp_Total;
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -8,6 +8,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
+    <button class="btn btn-info" name="View Report" onclick="location.href = '@Url.Action("Report", "FillUps")'">Delete</button>
 </p>
 
 @foreach (var item in Model)
@@ -29,9 +30,9 @@
             </div>
         </div>
         <hr/>
-        <button class="btn btn-primary" name="ViewCar" onclick="location.href = '@Url.Action("Details", "FillUps", new {  id = item.Car_ID})'">View</button>
-        <button class="btn btn-warning" name="EditCar" onclick="location.href = '@Url.Action("Edit", "FillUps", new {  id = item.Car_ID})'">Edit</button>
-        <button class="btn btn-danger" name="DeleteCar" onclick="location.href = '@Url.Action("Delete", "FillUps", new {  id = item.Car_ID})'">Delete</button>
+        <button class="btn btn-primary" name="ViewCar" onclick="location.href = '@Url.Action("Details", "FillUps", new {  id = item.FillUp_ID})'">View</button>
+        <button class="btn btn-warning" name="EditCar" onclick="location.href = '@Url.Action("Edit", "FillUps", new {  id = item.FillUp_ID})'">Edit</button>
+        <button class="btn btn-danger" name="DeleteCar" onclick="location.href = '@Url.Action("Delete", "FillUps", new {  id = item.FillUp_ID})'">Delete</button>
     </div>
 }
 
