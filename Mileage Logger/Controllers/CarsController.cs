@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Mileage_Logger.IdentityManagement;
 using Mileage_Logger.Models;
 
 namespace Mileage_Logger.Controllers
@@ -13,11 +14,13 @@ namespace Mileage_Logger.Controllers
     public class CarsController : Controller
     {
         private milageTrackerEntities db = new milageTrackerEntities();
+        static AccountModel accountModel = new AccountModel();
+        private int userID = accountModel.findUserId(UserSession.Username);
 
         // GET: Cars
         public ActionResult Index()
         {
-            var tblCars = db.tblCars.Include(t => t.tblUser);
+            var tblCars = db.tblCars.Include(t => t.tblUser).Where(x=>x.User_ID == userID);
             return View(tblCars.ToList());
         }
 
