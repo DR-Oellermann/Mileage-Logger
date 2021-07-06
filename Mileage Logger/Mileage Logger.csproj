@@ -211,7 +211,9 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\ReportController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\FillUpsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

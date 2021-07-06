@@ -125,7 +125,7 @@ namespace Mileage_Logger.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "FillUp_ID,FillUp_Milage,FillUp_Odo,FillUp_DateTime,FuelType_ID,Car_ID,FillUp_Liters,FillUp_LiterPrice,FillUp_Total,FillUp_SlipImage")] tblFillUp tblFillUp)
         {
-
+            // add image edit and validation
             if (ModelState.IsValid)
             {
                 var currentFillUp = db.tblFillUps.FirstOrDefault(x => x.FillUp_ID == tblFillUp.FillUp_ID);
